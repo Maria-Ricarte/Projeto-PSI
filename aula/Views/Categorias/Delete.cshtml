@@ -1,12 +1,12 @@
-﻿@model aula.Models.Categoria
+@model aula.Models.Categoria
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Visualizando detalhes de uma CATEGORIA";
+    ViewBag.Title = "Visualizando detalhes de um CATEGORIA";
 }
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Dados do fabricante a ser removido
+        Dados do categoria a ser removido
     </div>
     <div class="panel-body">
         <div class="form-group">
@@ -28,8 +28,9 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <input type="submit" value="Remover " class="btn btn-danger" />
-            @Html.ActionLink("Retornar para a listagem", "Index", null, new { @class = "btn btn-info" })
+            <input type="submit" value="Remover CATEGORIA" class="btn btn-danger" />
+            @Html.ActionLink("Retornar para a listagem", "Index", null,
+            new { @class = "btn btn-info" })
         }
     </div>
 </div>
