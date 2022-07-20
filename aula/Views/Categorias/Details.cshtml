@@ -1,12 +1,12 @@
-﻿@model aula.Models.Categoria
+@model aula.Models.Categoria
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Visualizando detalhes de uma CATEGORIA";
+    ViewBag.Title = "Visualizando detalhes de um CATEGORIA";
 }
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Visualizando detalhes de uma CATEGORIA
+        Visualizando detalhes de um CATEGORIA
     </div>
     <div class="panel-body">
         <div class="form-group">
@@ -16,12 +16,18 @@
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-user"></i>
                 </span>
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.EditorFor(model => model.Nome, new
+                {
+                    htmlAttributes =
+                new { @class = "form-control", disabled = "disabled" }
+                })
             </div>
         </div>
     </div>
     <div class="panel-footer panel-info">
-        @Html.ActionLink("Alterar", "Edit", new { id = Model.CategoriaId }, new { @class = "btn btn-info" })
-        @Html.ActionLink("Retornar para a listagem", "Index", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("Alterar", "Edit", new { id = Model.CategoriaId },
+        new { @class = "btn btn-info" })
+        @Html.ActionLink("Retornar para a listagem", "Index", null,
+        new { @class = "btn btn-info" })
     </div>
 </div>
