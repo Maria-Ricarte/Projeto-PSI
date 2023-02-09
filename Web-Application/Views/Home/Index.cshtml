@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Modelo.Cadastros.Produto>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home"; }
+@if (@TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>}
+<div style="border: 2px; border-color:black; margin-top: 0.5em;">
+    <div style="font-size: 26px; text-align: center; margin-top: 2em;">
+        PRODUTOS EM DESTAQUE
+        <hr size="10" width="50%" align="center">
+        <div class="panel-body">
+            @foreach (var item in Model)
+            {
+                if (item.Destaque == true)
+                {
+                    <div style="border: 1px solid rgb(255, 255, 255); margin-bottom: 1em">
+                        <div class="form-group">
+                            @if (item.NomeArquivo == null)
+                            {
+                                <div class="form-control-static">
+
+                                </div> }
+                            else
+                            {
+                                <div class="panel-body">
+                                    <img class="img-thumbnail"
+                                         src="@Url.Action("GetLogotipo2", "Produtos", new { id = item.ProdutoId })"
+                                         style="display: block; margin-left: auto; margin-right: auto;" />
+                                </div>}
+                        </div>
+                        <div style="font-size: 22px; text-align: center; margin-bottom: 0.5em">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </div>
+                        <div style="font-size: 18px; text-align: center; margin-bottom: 0.5em; color: darkgrey">
+                            @Html.DisplayFor(modelItem => item.Fabricante.Nome)
+                        </div>
+                    </div>          }
+            }
+        </div>
+    </div>
+
+    <hr size="10" width="100%" align="center">
+
+    <div class="panel">
+        <div style="font-size: 26px; text-align: center; margin-top: 2em;">
+            ÚLTIMOS PRODUTOS REGISTRADOS
+            <hr size="10" width="50%" align="center">
+        </div>
+        <div class="panel-body">
+            @foreach (var item in Model)
+            {
+                if (item.DataCadastro.AddDays(30) >= DateTime.Now)
+                {
+                    <div style="margin-bottom: 1em">
+                        <div class="form-group">
+                            @if (item.NomeArquivo == null)
+                            {
+                                <div class="form-control-static"> </div> }
+                            else
+                            {
+                                <div class="panel-body">
+                                    <img class="img-thumbnail"
+                                         src="@Url.Action("GetLogotipo2", "Produtos", new { id = item.ProdutoId })"
+                                         style="display:block; margin-left:auto; margin-right:auto;" />
+                                </div>}
+                        </div>
+                        <div style="font-size: 22px; text-align: center; margin-bottom: 0.5em">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </div>
+                        <div style="font-size: 18px; text-align: center; margin-bottom: 0.5em; color: darkgrey">
+                            @Html.DisplayFor(modelItem => item.Fabricante.Nome)
+                        </div>
+                    </div>}
+
+            }
+        </div>
+    </div>
+    @section styles{
+        <link href="@Url.Content("~/content/DataTables-1.10.2/css/dataTables.bootstrap.css")" rel="stylesheet" />
+    }
+    @section ScriptPage{
+        <script src="@Url.Content("~/scripts/DataTables-1.10.2/jquery.dataTables.js")"></script>
+        <script src="@Url.Content("~/scripts/DataTables-1.10.2/dataTables.bootstrap.js")"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('li').removeClass("active");
+                $('#liHome').addClass("active");
+                $('.table').dataTable({ "order": [[1, "asc"]] });
+            });
+        </script>
+    }
